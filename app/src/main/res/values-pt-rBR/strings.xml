@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AzureBD</string>
+    <string name="nome" translatable="false">Nome</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="senha">Password</string>
+    <string name="cadastrar">Cadastrar</string>
+</resources>

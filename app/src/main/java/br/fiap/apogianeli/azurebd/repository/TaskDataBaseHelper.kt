@@ -15,12 +15,12 @@ class TaskDataBaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE
 
 
     private val createTableUser = """
-        CREATE TABLE ${DataBaseConstants.USER.TABLE_NAME} {
+        CREATE TABLE ${DataBaseConstants.USER.TABLE_NAME} (
         ${DataBaseConstants.USER.COLUMNS.ID} INTEGER PRIMARY KEY AUTOINCREMENT,
         ${DataBaseConstants.USER.COLUMNS.NAME} TEXT,
         ${DataBaseConstants.USER.COLUMNS.EMAIL} TEXT,
         ${DataBaseConstants.USER.COLUMNS.PASSWORD} TEXT
-        };
+        );
         """
 
     private val deleteTableUser = "drop table if exists ${DataBaseConstants.USER.TABLE_NAME}"
@@ -36,6 +36,8 @@ class TaskDataBaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE
         // cria
         sqlLite.execSQL(createTableUser)
     }
+
+
 
 
 

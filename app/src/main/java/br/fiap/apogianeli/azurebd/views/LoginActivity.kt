@@ -1,9 +1,11 @@
 package br.fiap.apogianeli.azurebd.views
 
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import br.fiap.apogianeli.azurebd.R
+import br.fiap.apogianeli.azurebd.repository.UserRepository
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -14,6 +16,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
 
         setListeners()
+        UserRepository.getInstance(this)
 
     }
 

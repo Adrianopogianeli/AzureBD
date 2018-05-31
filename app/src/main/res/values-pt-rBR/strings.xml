@@ -5,4 +5,7 @@
     <string name="action_settings">Ajustes</string>
     <string name="senha">Password</string>
     <string name="cadastrar">Cadastrar</string>
+    <string name="info_all_fields">É necessario informa todos os campos</string>
+    <string name="general_erro">Algo de errado nao esta certo</string>
+    <string name="email_exists">Email já existe, pf utilize outro</string>
 </resources>

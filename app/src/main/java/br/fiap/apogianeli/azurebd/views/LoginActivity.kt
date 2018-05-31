@@ -1,63 +1,79 @@
 package br.fiap.apogianeli.azurebd.views
 
-import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import br.fiap.apogianeli.azurebd.R
 import br.fiap.apogianeli.azurebd.business.UserBusiness
-import br.fiap.apogianeli.azurebd.repository.UserRepository
-import br.fiap.apogianeli.azurebd.util.ValidationException
+import br.fiap.apogianeli.azurebd.constants.TaskConstants
+import br.fiap.apogianeli.azurebd.util.SecurityPreferences
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var mUserBusiness : UserBusiness
+    private  lateinit var mUserBusiness: UserBusiness
+    private lateinit var mSecurityPreferences: SecurityPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Eventos
+        //instanciar as entidades
+        mUserBusiness = UserBusiness(this)
+        mSecurityPreferences = SecurityPreferences(this)
+
+
         setListeners()
 
-        // Instanciar variaveis da classe
-        mUserBusiness = UserBusiness(this)
-        //UserRepository.getInstance(this)
+        verifyLoggedUser()
+
 
     }
 
     override fun onClick(view: View) {
         when (view.id){
-            R.id.buttonSave -> {
-                handleSave()
+            R.id.buttonLogin -> {
+                handleLogin()
             }
+
         }
     }
 
     private fun setListeners(){
-        buttonSave.setOnClickListener(this)
+        buttonLogin.setOnClickListener(this)
     }
 
-    private fun handleSave() {
+    private fun verifyLoggedUser(){
+        val userId = mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_ID)
+        val name = mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_NAME)
 
-        try {
-            val name = editName.text.toString()
-            val email = editEmail.text.toString()
-            val password = editPassword.text.toString()
+        if (userId != "" && name != ""){
+            startActivity(Intent(this,MainActivity::class.java))
+            finish()
 
-            // faz a inseercao do user
-            mUserBusiness.insert(name, email, password)
         }
-        catch (e: ValidationException){
-            Toast.makeText(this,e.message, Toast.LENGTH_LONG).show()
-        }catch (e: Exception){
-            Toast.makeText(this,getString(R.string.general_erro),Toast.LENGTH_LONG).show()
-        }
-
 
     }
+
+
+    private fun handleLogin(){
+        val email = editEmail.text.toString()
+        val password = editPassword.text.toString()
+
+        if (mUserBusiness.login(email,password)){
+
+            startActivity(Intent(this,MainActivity::class.java))
+            finish()
+
+        }else{
+            Toast.makeText(this,getString(R.string.user_pass_error),Toast.LENGTH_LONG).show()
+
+        }
+    }
+
+
 
 
 }

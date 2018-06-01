@@ -57,6 +57,7 @@ class AdduserActivity : AppCompatActivity(), View.OnClickListener {
             Toast.makeText(this,e.message, Toast.LENGTH_LONG).show()
         }catch (e: Exception){
             Toast.makeText(this,getString(R.string.general_erro),Toast.LENGTH_LONG).show()
+            Toast.makeText(this,e.toString(),Toast.LENGTH_LONG).show()
         }
 
 

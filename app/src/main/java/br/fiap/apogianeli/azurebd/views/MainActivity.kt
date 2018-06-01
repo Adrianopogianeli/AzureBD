@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_done -> {
                 // Handle the camera action
-                var fragment: Fragment? = null
+                fragment = TaskListFragment.newInstance()
             }
             R.id.nav_todo -> {
                 fragment = TaskListFragment.newInstance()
@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             fragmentManager.beginTransaction().replace(R.id.frameContent,fragment).commit()
 
         drawer_layout.closeDrawer(GravityCompat.START)
-        
+
         return true
     }
 

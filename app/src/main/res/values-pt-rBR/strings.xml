@@ -10,4 +10,5 @@
     <string name="email_exists">Email já existe, pf utilize outro</string>
     <string name="login">login</string>
     <string name="user_pass_error">Usuário e/ou senha estão incorretos</string>
+    <string name="descricao">Descrição</string>
 </resources>

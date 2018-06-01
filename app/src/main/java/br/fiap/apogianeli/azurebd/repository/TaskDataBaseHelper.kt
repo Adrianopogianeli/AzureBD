@@ -43,11 +43,17 @@ class TaskDataBaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE
 
 
     // Populando dados de prioridades
-    private val insertPriority = ("INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (1, 'Baixa');" +
+
+/*    private val insertPriority = ("INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (1, 'Baixa');" +
             "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (2, 'Média');" +
             "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (3, 'Alta');" +
             "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (4, 'Crítica');")
-
+            */
+    private val insertPriority = arrayOf("INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (1, 'Baixa');",
+        "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (2, 'Média');",
+        "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (3, 'Alta');",
+        "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (4, 'Crítica');"
+        )
 
     private val deleteTableUser = "drop table if exists ${DataBaseConstants.USER.TABLE_NAME}"
     private val deleteTablePriority = "drop table if exists ${DataBaseConstants.PRIORITY.TABLE_NAME}"
@@ -58,7 +64,11 @@ class TaskDataBaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE
         sqlLite.execSQL(createTableUser)
         sqlLite.execSQL(createTablePriority)
         sqlLite.execSQL(createTableTask )
-        sqlLite.execSQL(insertPriority )
+        //sqlLite.execSQL(insertPriority)
+        for (item in insertPriority) {
+            sqlLite.execSQL(item)
+            println("***************************** $item")
+        }
     }
 
 

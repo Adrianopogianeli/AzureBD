@@ -28,7 +28,7 @@ class PriorityRepository private constructor(context: Context){
         val list = mutableListOf<PriorityEntity>()
         try {
             val cursor: Cursor
-            val db = mTaskDataBaseHelper.readableDatabase
+            val db = this.mTaskDataBaseHelper.readableDatabase
 
             cursor = db.rawQuery("select * from ${DataBaseConstants.PRIORITY.TABLE_NAME}",null)
 
@@ -37,7 +37,9 @@ class PriorityRepository private constructor(context: Context){
                     val id = cursor.getInt(cursor.getColumnIndex(DataBaseConstants.PRIORITY.COLUMNS.ID))
                     val description = cursor.getString(cursor.getColumnIndex(DataBaseConstants.PRIORITY.COLUMNS.DESCRIPTION))
 
-                    list.add(PriorityEntity(id,description))
+                    val guestEntity = PriorityEntity(id, description)
+
+                    list.add(guestEntity)
                 }
             }
             cursor.close()

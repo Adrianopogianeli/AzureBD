@@ -79,7 +79,9 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
             val taskEntity = TaskEntity(0, userID, priorityId, description, dueDate, complete )
             mTaskBusiness.insert(taskEntity)
 
+
             Toast.makeText(this,"Task adicionada ao DB !!! viva Dilma", Toast.LENGTH_LONG).show()
+            finish()
 
         }catch (e: Exception){
             Toast.makeText(this, getString(R.string.general_erro), Toast.LENGTH_LONG).show()

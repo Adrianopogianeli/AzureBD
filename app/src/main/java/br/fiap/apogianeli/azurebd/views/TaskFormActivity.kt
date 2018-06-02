@@ -6,8 +6,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
+import android.widget.Toast
 import br.fiap.apogianeli.azurebd.R
 import br.fiap.apogianeli.azurebd.business.PriorityBusiness
+import br.fiap.apogianeli.azurebd.business.TaskBusiness
+import br.fiap.apogianeli.azurebd.constants.TaskConstants
+import br.fiap.apogianeli.azurebd.entities.PriorityEntity
+import br.fiap.apogianeli.azurebd.entities.TaskEntity
+import br.fiap.apogianeli.azurebd.util.SecurityPreferences
 import kotlinx.android.synthetic.main.activity_task_form.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -15,48 +21,44 @@ import java.util.*
 
 class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
-
-
     private lateinit var mPriorityBusiness: PriorityBusiness
+    private lateinit var mTaskBusiness: TaskBusiness
+    private lateinit var mSecurityPreferences: SecurityPreferences
     private val mSimpleDateFormat: SimpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
+
+    private var mLstPrioritiesEntity: MutableList<PriorityEntity> = mutableListOf()
+    private var mLstPrioritiesId: MutableList<Int> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_form)
 
-    mPriorityBusiness = PriorityBusiness(this)
-
+        mPriorityBusiness = PriorityBusiness(this)
+        mTaskBusiness = TaskBusiness(this)
+        mSecurityPreferences = SecurityPreferences(this)
         setListeners()
 
         loadPriorities()
+
 
     }
 
     override fun onClick(view: View?) {
         when(view?.id){
-            R.id.buttonDate ->{
-                openDatePickerDialog()
+            R.id.buttonDate -> {
+                openDatePrickerDialog()
+            }
+            R.id.buttonSave -> {
+                handleSave()
             }
         }
     }
 
     override fun onDateSet(view: DatePicker, year: Int, month: Int, dayOfMonth: Int) {
-
         val calendar = Calendar.getInstance()
-        calendar.set(year,month,dayOfMonth)
-        mSimpleDateFormat.format(calendar.time)
+        calendar.set(year, month, dayOfMonth)
+
         buttonDate.text = mSimpleDateFormat.format(calendar.time)
-
-    }
-
-    private fun openDatePickerDialog(){
-
-        val dt = Calendar.getInstance()
-        val year = dt.get(Calendar.YEAR)
-        val month = dt.get(Calendar.MONTH)
-        val dayOfMonth = dt.get(Calendar.DAY_OF_MONTH)
-
-        DatePickerDialog(this,this, year,month,dayOfMonth).show()
     }
 
     private fun setListeners(){
@@ -64,18 +66,48 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
         buttonSave.setOnClickListener(this)
     }
 
-    private fun loadPriorities() {
+    private fun handleSave(){
 
-        val lstPriorityEntity = mPriorityBusiness.getList()
+        try{
+            //  [1, 2, 3, 4]
+            val priorityId = mLstPrioritiesId[spinnerPriority.selectedItemPosition]
+            val complete = checkboxComplete.isChecked
+            val dueDate = buttonDate.text.toString()
+            val description = editDescription.text.toString()
+            val userID =  mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_ID).toInt()
 
-        val lstPriorities = lstPriorityEntity.map { it.description }
+            val taskEntity = TaskEntity(0, userID, priorityId, description, dueDate, complete )
+            mTaskBusiness.insert(taskEntity)
 
-        print(lstPriorities)
+            Toast.makeText(this,"Task adicionada ao DB !!! viva Dilma", Toast.LENGTH_LONG).show()
 
-        val adapter = ArrayAdapter<String> (this, android.R.layout.simple_spinner_dropdown_item, lstPriorities)
-        spinnerPriority.adapter = adapter
+        }catch (e: Exception){
+            Toast.makeText(this, getString(R.string.general_erro), Toast.LENGTH_LONG).show()
+        }
 
     }
 
+    private fun openDatePrickerDialog() {
+
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val dayOfMonth = c.get(Calendar.DAY_OF_MONTH)
+
+
+        DatePickerDialog(this, this, year, month, dayOfMonth).show()
+    }
+
+    private fun loadPriorities(){
+        mLstPrioritiesEntity = mPriorityBusiness.getList()
+        val lstPriorities = mLstPrioritiesEntity.map { it.description}
+        mLstPrioritiesId = mLstPrioritiesEntity.map {it.id}.toMutableList()
+
+        // [Baixa, media, alta, Critica]
+        //  [1, 2, 3, 4]
+
+        val adapter = ArrayAdapter<String> (this, android.R.layout.simple_spinner_dropdown_item, lstPriorities)
+        spinnerPriority.adapter = adapter
+    }
 
 }

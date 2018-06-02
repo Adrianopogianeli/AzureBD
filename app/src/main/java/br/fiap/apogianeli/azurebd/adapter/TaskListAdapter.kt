@@ -1,12 +1,14 @@
 package br.fiap.apogianeli.azurebd.adapter
 
+
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import br.fiap.apogianeli.azurebd.R
 import br.fiap.apogianeli.azurebd.entities.TaskEntity
 import br.fiap.apogianeli.azurebd.viewholder.TaskViewHolder
-
 
 class TaskListAdapter (val taskList: List<TaskEntity>) : RecyclerView.Adapter <TaskViewHolder>() {
 

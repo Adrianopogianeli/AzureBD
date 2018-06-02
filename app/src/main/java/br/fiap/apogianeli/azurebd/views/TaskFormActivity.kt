@@ -71,7 +71,7 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
         try{
             //  [1, 2, 3, 4]
             val priorityId = mLstPrioritiesId[spinnerPriority.selectedItemPosition]
-            val complete = checkboxComplete.isChecked
+            val complete = checkComplete.isChecked
             val dueDate = buttonDate.text.toString()
             val description = editDescription.text.toString()
             val userID =  mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_ID).toInt()
@@ -79,12 +79,10 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
             val taskEntity = TaskEntity(0, userID, priorityId, description, dueDate, complete )
             mTaskBusiness.insert(taskEntity)
 
-
-            Toast.makeText(this,"Task adicionada ao DB !!! viva Dilma", Toast.LENGTH_LONG).show()
             finish()
 
         }catch (e: Exception){
-            Toast.makeText(this, getString(R.string.general_erro), Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.general_erro), Toast.LENGTH_LONG)
         }
 
     }

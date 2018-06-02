@@ -1,10 +1,14 @@
 package br.fiap.apogianeli.azurebd.entities
 
-data class TaskEntity (
-        val id: Int,
-        val userid: Int,
-        val priorityId: Int,
-        val description: String,
-        var dueDate: String,
-        var complete: Boolean
-)
+import java.util.*
+
+data class TaskEntity (val id: Int,
+                       val userID: Int,
+                       val priorityID: Int,
+                       var description: String,
+                       var dueDate: String,
+                       var complete: Boolean){
+
+
+
+}

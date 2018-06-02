@@ -15,6 +15,7 @@ import br.fiap.apogianeli.azurebd.R
 import br.fiap.apogianeli.azurebd.adapter.TaskListAdapter
 import br.fiap.apogianeli.azurebd.business.TaskBusiness
 import br.fiap.apogianeli.azurebd.constants.TaskConstants
+import br.fiap.apogianeli.azurebd.entities.TaskEntity
 import br.fiap.apogianeli.azurebd.util.SecurityPreferences
 
 
@@ -88,8 +89,7 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         mRecyclerTaskList = rootView.findViewById(R.id.recyclerTaskList)
 
         // 2 Definir um layout com os itens de listagem
-
-        mRecyclerTaskList.adapter = TaskListAdapter(taskList = mutableListOf())
+        mRecyclerTaskList.adapter = TaskListAdapter(mutableListOf())
 
         // 3 Definir um layout
         mRecyclerTaskList.layoutManager = LinearLayoutManager(mContext)
@@ -97,11 +97,10 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         return rootView
     }
 
-    override fun onResume () {
+    override fun onResume() {
         super.onResume()
         loadTasks()
     }
-
 
     override fun onClick(view: View) {
         when (view.id){
@@ -111,13 +110,7 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun loadTasks() {
-
-        val userId = mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_ID).toInt()
-        val taskList = mTaskBusiness.getList(userId)
-
-        mRecyclerTaskList.adapter = TaskListAdapter(taskList)
-
+    private fun loadTasks(){
+        mRecyclerTaskList.adapter = TaskListAdapter(mTaskBusiness.getList())
     }
-
 }

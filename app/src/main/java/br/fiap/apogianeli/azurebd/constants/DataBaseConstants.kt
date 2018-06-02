@@ -31,7 +31,7 @@ class DataBaseConstants {
             val PRIORITYID = "priorityid"
             val DESCRIPTION = "description"
             val COMPLETE = "complete"
-            val DUETATE = "duedate"
+            val DUEDATE = "duedate"
         }
     }
 

@@ -5,51 +5,49 @@ import android.database.Cursor
 import br.fiap.apogianeli.azurebd.constants.DataBaseConstants
 import br.fiap.apogianeli.azurebd.entities.PriorityEntity
 
+
 class PriorityRepository private constructor(context: Context){
 
-    private var mTaskDataBaseHelper: TaskDataBaseHelper = TaskDataBaseHelper(context)
+    private var mTaskDatabaseHelper : TaskDatabaseHelper = TaskDatabaseHelper(context)
 
     companion object {
-        fun getInstance(context: Context) : PriorityRepository {
-
-            if(INSTANCE == null){
+        fun getInstance (context: Context) : PriorityRepository{
+            if (INSTANCE == null){
                 INSTANCE = PriorityRepository(context)
             }
             return INSTANCE as PriorityRepository
-
         }
 
         private var INSTANCE: PriorityRepository? = null
+
     }
 
-    // func para retornar valor para o spinner
-    fun getList(): MutableList<PriorityEntity>{
+    fun getList() : MutableList<PriorityEntity>{
 
         val list = mutableListOf<PriorityEntity>()
-        try {
+
+        try{
             val cursor: Cursor
-            val db = this.mTaskDataBaseHelper.readableDatabase
+            val db = mTaskDatabaseHelper.readableDatabase
 
-            cursor = db.rawQuery("select * from ${DataBaseConstants.PRIORITY.TABLE_NAME}",null)
-
+            cursor = db.rawQuery("SELECT * FROM ${DataBaseConstants.PRIORITY.TABLE_NAME}", null)
             if (cursor.count > 0){
-                while (cursor.moveToNext()){
+                while (cursor.moveToNext()) {
+
                     val id = cursor.getInt(cursor.getColumnIndex(DataBaseConstants.PRIORITY.COLUMNS.ID))
                     val description = cursor.getString(cursor.getColumnIndex(DataBaseConstants.PRIORITY.COLUMNS.DESCRIPTION))
 
-                    val guestEntity = PriorityEntity(id, description)
-
-                    list.add(guestEntity)
+                    list.add(PriorityEntity(id, description))
                 }
             }
+
             cursor.close()
 
-        }catch (e: Exception) {
+        }catch (e: Exception){
             return list
         }
 
         return list
-
     }
 
 }

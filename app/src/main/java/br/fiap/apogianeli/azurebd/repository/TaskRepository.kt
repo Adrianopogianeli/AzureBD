@@ -3,6 +3,8 @@ package br.fiap.apogianeli.azurebd.repository
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
+import android.provider.ContactsContract
+import android.widget.Toast
 import br.fiap.apogianeli.azurebd.constants.DataBaseConstants
 import br.fiap.apogianeli.azurebd.entities.TaskEntity
 
@@ -10,6 +12,7 @@ import br.fiap.apogianeli.azurebd.entities.TaskEntity
 class TaskRepository(context: Context) {
 
     private var mTaskDatabaseHelper: TaskDatabaseHelper = TaskDatabaseHelper(context)
+    private val ncontext = context
 
     companion object {
         fun getInstance(context: Context): TaskRepository {
@@ -24,15 +27,16 @@ class TaskRepository(context: Context) {
     }
 
 
-    fun getList(userID: Int): MutableList<TaskEntity> {
+    fun getList(userID: Int, taskFilter: Int): MutableList<TaskEntity> {
 
         val list = mutableListOf<TaskEntity>()
 
         try {
             val cursor: Cursor
             val db = mTaskDatabaseHelper.readableDatabase
-
-            cursor = db.rawQuery("SELECT * FROM ${DataBaseConstants.TASK.TABLE_NAME} WHERE ${DataBaseConstants.TASK.COLUMNS.USERID} = $userID", null)
+            val sql = "\"SELECT * FROM ${DataBaseConstants.TASK.TABLE_NAME}"
+            //cursor = db.rawQuery("SELECT * FROM ${DataBaseConstants.TASK.TABLE_NAME} WHERE ${DataBaseConstants.TASK.COLUMNS.USERID} = $userID AND ${DataBaseConstants.TASK.COLUMNS.COMPLETE} = $taskFilter ", null)
+            cursor = db.rawQuery(sql,null)
             if (cursor.count > 0) {
                 while (cursor.moveToNext()) {
 
@@ -44,6 +48,8 @@ class TaskRepository(context: Context) {
 
                     list.add(TaskEntity(id, userID, priorityId, description, dueDate, complete))
                 }
+            }else {
+                println("------------> ${DataBaseConstants.TASK.TABLE_NAME} A query retornou 0!!!!")
             }
 
             cursor.close()
@@ -84,7 +90,12 @@ class TaskRepository(context: Context) {
                 // Preencho a entidade de usuario
                 taskEntity = TaskEntity(id, userId, priorityId, description, dueDate, complete)
 
+                println("------------> ${DataBaseConstants.TASK.TABLE_NAME} A query retornou ${cursor.count} VALORES")
+
+            }else {
+                println("------------> ${DataBaseConstants.TASK.TABLE_NAME} A query retornou 0!!!!")
             }
+
 
             cursor.close()
         } catch (e: Exception) {
@@ -99,7 +110,7 @@ class TaskRepository(context: Context) {
         // select, update, inserte, delete
 
         try {
-
+            Toast.makeText(ncontext,"Tentando inserir",Toast.LENGTH_LONG).show()
             val db = mTaskDatabaseHelper.writableDatabase
 
             val complete: Int = if (task.complete) {
@@ -108,15 +119,24 @@ class TaskRepository(context: Context) {
                 0
             }
 
+            val user : String
+            if (DataBaseConstants.TASK.COLUMNS.USERID == null || DataBaseConstants.TASK.COLUMNS.USERID  == ""){
+                 user = "1"
+            }else{
+                user = DataBaseConstants.TASK.COLUMNS.USERID
+            }
+
 
             val insertValues = ContentValues()
-            insertValues.put(DataBaseConstants.TASK.COLUMNS.USERID, task.userID)
+            insertValues.put(user, task.userID)
             insertValues.put(DataBaseConstants.TASK.COLUMNS.PRIORITYID, task.priorityID)
             insertValues.put(DataBaseConstants.TASK.COLUMNS.DESCRIPTION, task.description)
             insertValues.put(DataBaseConstants.TASK.COLUMNS.DUEDATE, task.dueDate)
             insertValues.put(DataBaseConstants.TASK.COLUMNS.COMPLETE, complete)
 
             db.insert(DataBaseConstants.TASK.TABLE_NAME, null, insertValues).toInt()
+
+            println("----------------> o insert da task $insertValues")
 
         } catch (e: Exception) {
             throw e

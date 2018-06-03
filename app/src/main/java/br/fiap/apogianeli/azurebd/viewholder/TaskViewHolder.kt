@@ -9,11 +9,12 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import br.fiap.apogianeli.azurebd.R
+import br.fiap.apogianeli.azurebd.entities.OnTaskListFragmentInteractionListener
 import br.fiap.apogianeli.azurebd.entities.TaskEntity
 import br.fiap.apogianeli.azurebd.repository.PriorityCacheConstants
 
 
-class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+class TaskViewHolder(itemView: View, val listener: OnTaskListFragmentInteractionListener) : RecyclerView.ViewHolder(itemView){
 
     private val mTextDescription: TextView = itemView.findViewById(R.id.textDescription)
     private val mTextPriority: TextView = itemView.findViewById(R.id.textPriority)
@@ -21,14 +22,25 @@ class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
     private val mImageTask: ImageView = itemView.findViewById(R.id.imageTask)
 
 
-    fun bindData(task: TaskEntity){
+    fun bindData(task: TaskEntity) {
         mTextDescription.text = task.description
         mTextPriority.text = PriorityCacheConstants.getPriorityDescription(task.priorityID)
         mTextDate.text = task.dueDate
 
-        if (task.complete){
+        if (task.complete) {
             mImageTask.setImageResource(R.drawable.ic_done)
         }
+
+        // evento de click p edit
+/*        mTextDescription.setOnClickListener(View.OnClickListener {  })
+            listener.onListclick(task.id)
+    }*/
+        mTextDescription.setOnClickListener({
+            listener.onListclick(task.id)
+        })
+
+        
+
     }
 
 }

@@ -9,5 +9,15 @@ class TaskConstants {
 
     }
 
+    object TASKFILTER {
+        val KEY = "taskFilterKey"
+        val COMPLETE = 1
+        val TODO = 0
+    }
+
+    object BUNDLE {
+        val TASKID = "filterTaskId"
+    }
+
 
 }

@@ -15,8 +15,10 @@ import br.fiap.apogianeli.azurebd.R
 import br.fiap.apogianeli.azurebd.adapter.TaskListAdapter
 import br.fiap.apogianeli.azurebd.business.TaskBusiness
 import br.fiap.apogianeli.azurebd.constants.TaskConstants
+import br.fiap.apogianeli.azurebd.entities.OnTaskListFragmentInteractionListener
 import br.fiap.apogianeli.azurebd.entities.TaskEntity
 import br.fiap.apogianeli.azurebd.util.SecurityPreferences
+import java.util.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -49,31 +51,30 @@ class TaskListFragment : Fragment(), View.OnClickListener {
     private lateinit var mRecyclerTaskList: RecyclerView
     private lateinit var mTaskBusiness: TaskBusiness
     private lateinit var mSecurityPreferences: SecurityPreferences
+    private lateinit var mListener : OnTaskListFragmentInteractionListener
+    private var mTaskFilter: Int = 0
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TaskListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
-        fun newInstance(): TaskListFragment {
-/*
-            arguments = Bundle().apply {
-                putString(ARG_PARAM1, param1)
-                putString(ARG_PARAM2, param2)
-            }
-*/
-            return TaskListFragment()
+        fun newInstance(taskFilter: Int): TaskListFragment {
+
+            val args: Bundle = Bundle()
+            args.putInt(TaskConstants.TASKFILTER.KEY, taskFilter)
+
+            val fragment = TaskListFragment()
+            fragment.arguments = args
+
+            return fragment
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (arguments != null){
+            mTaskFilter = arguments!!.getInt(TaskConstants.TASKFILTER.KEY)
+
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -82,20 +83,37 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         rootView.findViewById<FloatingActionButton>(R.id.floatAddTask).setOnClickListener(this)
         mContext = rootView.context
 
+        // Init das variaveis
         mTaskBusiness = TaskBusiness(mContext)
         mSecurityPreferences = SecurityPreferences(mContext)
+        mListener = object : OnTaskListFragmentInteractionListener{
+            override fun onListclick(taskId: Int) {
+
+                val bundle: Bundle = Bundle()
+                bundle.putInt(TaskConstants.BUNDLE.TASKID,taskId)
+
+                val intent = Intent(mContext, TaskFormActivity::class.java)
+                intent.putExtras(bundle)
+
+                startActivity(intent)
+
+            }
+
+        }
 
         // 1 Obter o elemento
         mRecyclerTaskList = rootView.findViewById(R.id.recyclerTaskList)
 
         // 2 Definir um layout com os itens de listagem
-        mRecyclerTaskList.adapter = TaskListAdapter(mutableListOf())
+        //val bosta = mRecyclerTaskList.adapter = TaskListAdapter(mutableListOf())
+        mRecyclerTaskList.adapter = TaskListAdapter(mutableListOf(), mListener)
 
         // 3 Definir um layout
         mRecyclerTaskList.layoutManager = LinearLayoutManager(mContext)
 
         return rootView
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -111,6 +129,6 @@ class TaskListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun loadTasks(){
-        mRecyclerTaskList.adapter = TaskListAdapter(mTaskBusiness.getList())
+        mRecyclerTaskList.adapter = TaskListAdapter(mTaskBusiness.getList(mTaskFilter),mListener)
     }
 }

@@ -28,6 +28,7 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
 
     private var mLstPrioritiesEntity: MutableList<PriorityEntity> = mutableListOf()
     private var mLstPrioritiesId: MutableList<Int> = mutableListOf()
+    private var mTaskId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,11 +37,32 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
         mPriorityBusiness = PriorityBusiness(this)
         mTaskBusiness = TaskBusiness(this)
         mSecurityPreferences = SecurityPreferences(this)
+
         setListeners()
 
         loadPriorities()
 
+        loadDataFromActivity()
+    }
 
+    override fun onStart() {
+        super.onStart()
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
     override fun onClick(view: View?) {
@@ -50,6 +72,7 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
             }
             R.id.buttonSave -> {
                 handleSave()
+                //finish()
             }
         }
     }
@@ -66,6 +89,22 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
         buttonSave.setOnClickListener(this)
     }
 
+    private fun loadDataFromActivity(){
+        val bundle = intent.extras
+
+        if (bundle != null){
+            mTaskId = bundle.getInt(TaskConstants.BUNDLE.TASKID)
+
+            val task = mTaskBusiness.get(mTaskId)
+            if (task != null) {
+                editDescription.setText(task.description)
+                buttonDate.text = task.dueDate
+                checkComplete.isChecked = task.complete
+                spinnerPriority.setSelection(getIndex(task.priorityID))
+            }
+        }
+    }
+
     private fun handleSave(){
 
         try{
@@ -76,13 +115,20 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
             val description = editDescription.text.toString()
             val userID =  mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_ID).toInt()
 
-            val taskEntity = TaskEntity(0, userID, priorityId, description, dueDate, complete )
-            mTaskBusiness.insert(taskEntity)
+            val taskEntity = TaskEntity(mTaskId, userID, priorityId, description, dueDate, complete )
+
+            if(mTaskId == 0) {
+                mTaskBusiness.insert(taskEntity)
+                Toast.makeText(this,getString(R.string.tarefa_incluida_sucesso),Toast.LENGTH_LONG).show()
+            }else{
+                mTaskBusiness.update(taskEntity)
+                Toast.makeText(this,getString(R.string.tarefa_alterada_sucesso),Toast.LENGTH_LONG).show()
+            }
 
             finish()
 
         }catch (e: Exception){
-            Toast.makeText(this, getString(R.string.general_erro), Toast.LENGTH_LONG)
+            Toast.makeText(this, getString(R.string.tarefa_alterada_sucesso), Toast.LENGTH_LONG)
         }
 
     }
@@ -96,6 +142,18 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
 
 
         DatePickerDialog(this, this, year, month, dayOfMonth).show()
+    }
+
+    private fun getIndex(id: Int) : Int{
+
+        var index = 0
+        for (i in 0..mLstPrioritiesEntity.size){
+            if (mLstPrioritiesEntity[i].id == id){
+                index = i
+                break
+            }
+        }
+        return index
     }
 
     private fun loadPriorities(){

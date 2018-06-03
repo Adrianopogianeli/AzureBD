@@ -8,6 +8,8 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import br.fiap.apogianeli.azurebd.R
 import br.fiap.apogianeli.azurebd.business.PriorityBusiness
 import br.fiap.apogianeli.azurebd.constants.TaskConstants
@@ -15,6 +17,7 @@ import br.fiap.apogianeli.azurebd.repository.PriorityCacheConstants
 import br.fiap.apogianeli.azurebd.util.SecurityPreferences
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -25,6 +28,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
 //        fab.setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -44,6 +48,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         loadPriorityCache()
         startDefaultFragment()
+        formatUserName()
+        formatDate()
 
     }
 
@@ -98,7 +104,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (id) {
             R.id.nav_done -> fragment = TaskListFragment.newInstance(TaskConstants.TASKFILTER.COMPLETE)
             R.id.nav_todo -> fragment = TaskListFragment.newInstance(TaskConstants.TASKFILTER.TODO)
-            R.id.nav_logout -> handleLogout()
+            R.id.nav_logout -> {
+                handleLogout()
+                return false
+            }
         }
 
         val fragmentManager = supportFragmentManager
@@ -128,4 +137,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
+
+    private fun formatUserName(){
+        val str = "Óla, ${mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_NAME)}"
+        textHello.text = str
+        // change nav_header
+        val navigationView = findViewById<View>(R.id.nav_view) as NavigationView
+        val header = navigationView.getHeaderView(0)
+        // change nav_header elements
+        val name = header.findViewById<TextView>(R.id.textName)
+        val email = header.findViewById<TextView>(R.id.textEmail)
+        name.text = mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_NAME)
+        email.text = mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_EMAIL)
+    }
+
+    private fun formatDate(){
+        val c = Calendar.getInstance()
+
+        val days = arrayOf("Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado")
+        val months = arrayOf("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novemembro", "Dezembro")
+
+        val str = "${days[c.get(Calendar.DAY_OF_WEEK) - 1]}, ${c.get(Calendar.DAY_OF_MONTH)} de ${months[c.get(Calendar.MONTH)]}"
+        textDateDescription.text = str
+
+    }
+
+
 }

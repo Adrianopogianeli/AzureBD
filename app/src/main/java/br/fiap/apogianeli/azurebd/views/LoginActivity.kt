@@ -37,6 +37,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             R.id.buttonLogin -> {
                 handleLogin()
             }
+            R.id.textRegister ->{
+                startActivity(Intent(this,AdduserActivity::class.java))
+            }
 
         }
     }

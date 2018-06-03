@@ -49,6 +49,14 @@ class TaskViewHolder(itemView: View, val context: Context, val listener: OnTaskL
             true
         })
 
+        mImageTask.setOnClickListener({
+            if (task.complete){
+                listener.onUncompliteClick(task.id)
+            }else{
+                listener.onCompliteClick(task.id)
+            }
+        })
+
     }
 
     private fun showConfirmationDialog(task: TaskEntity){

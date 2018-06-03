@@ -20,6 +20,7 @@ import br.fiap.apogianeli.azurebd.entities.OnTaskListFragmentInteractionListener
 import br.fiap.apogianeli.azurebd.entities.TaskEntity
 import br.fiap.apogianeli.azurebd.util.SecurityPreferences
 import java.util.*
+import kotlin.math.truncate
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -104,6 +105,16 @@ class TaskListFragment : Fragment(), View.OnClickListener {
                 mTaskBusiness.delete(taskId)
                 loadTasks()
                 Toast.makeText(context,getString(R.string.tarefa_removida_sucessp),Toast.LENGTH_LONG).show()
+            }
+
+            override fun onUncompliteClick(taskId: Int) {
+                mTaskBusiness.complete(taskId, false)
+                loadTasks()
+            }
+
+            override fun onCompliteClick(taskId: Int) {
+                mTaskBusiness.complete(taskId, true)
+                loadTasks()
             }
 
 

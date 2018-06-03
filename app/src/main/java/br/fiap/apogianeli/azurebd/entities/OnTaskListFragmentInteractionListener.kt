@@ -6,4 +6,10 @@ interface OnTaskListFragmentInteractionListener {
 
     fun onDeleteClick(taskId: Int)
 
+    fun onUncompliteClick(taskId: Int)
+
+    fun onCompliteClick(taskId: Int)
+
+
+
 }

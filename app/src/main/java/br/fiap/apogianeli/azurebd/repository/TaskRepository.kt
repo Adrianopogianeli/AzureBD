@@ -34,7 +34,8 @@ class TaskRepository(context: Context) {
         try {
             val cursor: Cursor
             val db = mTaskDatabaseHelper.readableDatabase
-            val sql = "\"SELECT * FROM ${DataBaseConstants.TASK.TABLE_NAME}"
+            //val sql = "SELECT * FROM ${DataBaseConstants.TASK.TABLE_NAME}"
+            val sql = "SELECT * FROM ${DataBaseConstants.TASK.TABLE_NAME} WHERE ${DataBaseConstants.TASK.COLUMNS.USERID} = $userID AND ${DataBaseConstants.TASK.COLUMNS.COMPLETE} = $taskFilter "
             //cursor = db.rawQuery("SELECT * FROM ${DataBaseConstants.TASK.TABLE_NAME} WHERE ${DataBaseConstants.TASK.COLUMNS.USERID} = $userID AND ${DataBaseConstants.TASK.COLUMNS.COMPLETE} = $taskFilter ", null)
             cursor = db.rawQuery(sql,null)
             if (cursor.count > 0) {

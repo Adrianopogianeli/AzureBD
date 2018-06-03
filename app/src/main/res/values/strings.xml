@@ -18,5 +18,6 @@
     <string name="descricao">Descrição</string>
     <string name="tarefa_alterada_sucesso">Tarefa alterada com sucesso</string>
     <string name="tarefa_incluida_sucesso">Tarefa adicionada com sucesso</string>
+    <string name="tarefa_removida_sucessp">Tarefa removida com sucesso</string>
 
 </resources>

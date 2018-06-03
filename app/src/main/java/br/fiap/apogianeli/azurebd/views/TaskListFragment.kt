@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import br.fiap.apogianeli.azurebd.R
 import br.fiap.apogianeli.azurebd.adapter.TaskListAdapter
@@ -87,6 +88,7 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         mTaskBusiness = TaskBusiness(mContext)
         mSecurityPreferences = SecurityPreferences(mContext)
         mListener = object : OnTaskListFragmentInteractionListener{
+
             override fun onListclick(taskId: Int) {
 
                 val bundle: Bundle = Bundle()
@@ -96,8 +98,14 @@ class TaskListFragment : Fragment(), View.OnClickListener {
                 intent.putExtras(bundle)
 
                 startActivity(intent)
-
             }
+
+            override fun onDeleteClick(taskId: Int) {
+                mTaskBusiness.delete(taskId)
+                loadTasks()
+                Toast.makeText(context,getString(R.string.tarefa_removida_sucessp),Toast.LENGTH_LONG).show()
+            }
+
 
         }
 

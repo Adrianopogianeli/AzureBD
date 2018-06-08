@@ -34,19 +34,12 @@ class TaskDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         ${DataBaseConstants.TASK.COLUMNS.PRIORITYID} INTEGER,
         ${DataBaseConstants.TASK.COLUMNS.DESCRIPTION} TEXT,
         ${DataBaseConstants.TASK.COLUMNS.COMPLETE} INTEGER,
-        ${DataBaseConstants.TASK.COLUMNS.DUEDATE} TEXT
+        ${DataBaseConstants.TASK.COLUMNS.DUEDATE} TEXT,
+        ${DataBaseConstants.TASK.COLUMNS.PRICE} INTEGER
         );"""
 
 
-    /*    private val insertPriorities = """INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME}
-            VALUES (1, 'Baixa'), (2, 'Media'), (3, 'Alta'), (4, 'Critica')"""
-    */
-/*    private val insertPriority = ("INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (1, 'Baixa');" +
-            "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (2, 'Média');" +
-            "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (3, 'Alta');" +
-            "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (4, 'Crítica');")
-*/
-    private val insertPriority = arrayOf("INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (1, 'Baixa');", "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (2, 'Média');", "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (3, 'Alta');", "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (4, 'Crítica');")
+    private val insertPriority = arrayOf("INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (1, 'Game');", "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (2, 'Eletronico');", "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (3, 'Vestuario');", "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (4, 'Souvenir');")
 
     private val deleteTableUser = "drop table if exists ${DataBaseConstants.USER.TABLE_NAME}"
     private val deleteTablePriority = "drop table if exists ${DataBaseConstants.PRIORITY.TABLE_NAME}"

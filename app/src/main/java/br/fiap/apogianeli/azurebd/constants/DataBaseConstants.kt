@@ -32,6 +32,7 @@ class DataBaseConstants {
             val DESCRIPTION = "description"
             val COMPLETE = "complete"
             val DUEDATE = "duedate"
+            val PRICE = "price"
         }
     }
 

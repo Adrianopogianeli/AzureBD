@@ -24,12 +24,14 @@ class TaskViewHolder(itemView: View, val context: Context, val listener: OnTaskL
     private val mTextPriority: TextView = itemView.findViewById(R.id.textPriority)
     private val mTextDate: TextView = itemView.findViewById(R.id.textDueDate)
     private val mImageTask: ImageView = itemView.findViewById(R.id.imageTask)
+    private val mPrice: TextView = itemView.findViewById(R.id.textSetPrice)
 
 
     fun bindData(task: TaskEntity) {
         mTextDescription.text = task.description
         mTextPriority.text = PriorityCacheConstants.getPriorityDescription(task.priorityID)
         mTextDate.text = task.dueDate
+        mPrice.text = "AU$ "+task.price.toString()
 
         if (task.complete) {
             mImageTask.setImageResource(R.drawable.ic_done)

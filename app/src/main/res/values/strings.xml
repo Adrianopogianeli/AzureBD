@@ -40,5 +40,10 @@
     <string name="tvInfoProduct">Digite abaixo as informações do produto de sua lista de compras</string>
     <string name="necessario_input_dados">Please fill in the description and price fields</string>
     <string name="hello">Welcome, user</string>
+    <string name="compradas">Produtos comprados</string>
+    <string name="pendentes">A Comprar</string>
+    <string name="sair">Logout</string>
+    <string name="mapas">Mapas</string>
+    <string name="sobre">Sobre</string>
 
 </resources>

@@ -13,9 +13,9 @@ import br.fiap.apogianeli.azurebd.business.TaskBusiness
 import br.fiap.apogianeli.azurebd.constants.TaskConstants
 import br.fiap.apogianeli.azurebd.entities.PriorityEntity
 import br.fiap.apogianeli.azurebd.entities.TaskEntity
-import br.fiap.apogianeli.azurebd.views.TaskListFragment
 import br.fiap.apogianeli.azurebd.util.SecurityPreferences
 import kotlinx.android.synthetic.main.activity_task_form.*
+import kotlinx.android.synthetic.main.row_task_list.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -105,6 +105,7 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
                 buttonDate.text = task.dueDate
                 checkComplete.isChecked = task.complete
                 spinnerPriority.setSelection(getIndex(task.priorityID))
+                textGetPrice.setText(task.price.toString())
 
 
                 buttonSave.text = getString(R.string.atualizar_tarefa)
@@ -122,11 +123,11 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
             val dueDate = buttonDate.text.toString()
             val description = editDescription.text.toString()
             val userID =  mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_ID).toInt()
-            val price = textValor.text.toString()
+            val price =  textGetPrice.text.toString()
 
-            if(description != "" && price != "") {
+            if(description != "" && price != "" ) {
 
-                val taskEntity = TaskEntity(mTaskId, userID, priorityId, description, dueDate, complete)
+                val taskEntity = TaskEntity(mTaskId, userID, priorityId, description, dueDate, price.toInt() ,complete)
 
 
                 if (mTaskId == 0) {

@@ -17,13 +17,14 @@
 
     <TextView
         android:id="@+id/textDescription"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/imageTask"
         android:text="Description"
         />
+
 
     <TextView
         android:id="@+id/textPriority"
@@ -43,6 +44,19 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:text="Date"/>
+
+    <TextView
+        android:id="@+id/textSetPrice"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/textDescription"
+        android:gravity="center_horizontal"
+        android:text="price $$"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        />
 
     <View
         android:id="@+id/view"

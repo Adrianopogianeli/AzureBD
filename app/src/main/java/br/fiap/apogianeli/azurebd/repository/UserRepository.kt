@@ -80,7 +80,6 @@ class UserRepository private constructor(context: Context) {
             ret = cursor.count > 0
 
             cursor.close()
-            // db.rawQuery("select * from user where email - gabriel", null )
 
 
         }catch (e: Exception){
@@ -88,8 +87,7 @@ class UserRepository private constructor(context: Context) {
         }
 
         return ret
-        // Para mais um commit
-        
+
     }
     fun insert(name: String, email: String, password: String) : Int{
         // select, update, inserte, delete

@@ -113,7 +113,7 @@ class TaskRepository(context: Context) {
         // select, update, inserte, delete
 
         try {
-            Toast.makeText(ncontext,"Tentando inserir",Toast.LENGTH_LONG).show()
+            //Toast.makeText(ncontext,"Tentando inserir",Toast.LENGTH_LONG).show()
             val db = mTaskDatabaseHelper.writableDatabase
 
             val complete: Int = if (task.complete) {

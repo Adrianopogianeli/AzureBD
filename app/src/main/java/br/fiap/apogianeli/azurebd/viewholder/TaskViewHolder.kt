@@ -64,11 +64,11 @@ class TaskViewHolder(itemView: View, val context: Context, val listener: OnTaskL
     private fun showConfirmationDialog(task: TaskEntity){
         //listener.onDeleteClick(taskId)
         AlertDialog.Builder(context)
-                .setTitle("Remoção de tarefa")
-                .setMessage("Deseja remover ${task.description}?")
+                .setTitle(context.getString(R.string.remocao_do_produto))
+                .setMessage("Are you sure you want to remove ${task.description}?")
                 .setIcon(R.drawable.ic_delete)
-                .setPositiveButton("Remove",handleRemoval(listener,task.id))
-                .setNegativeButton("Cancelar",null).show()
+                .setPositiveButton(context.getString(R.string.Remove),handleRemoval(listener,task.id))
+                .setNegativeButton("Cancel",null).show()
 
     }
 

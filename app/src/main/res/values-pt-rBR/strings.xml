@@ -1,46 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="nome">Name</string>
-    <string name="app_name">Shopping Australia</string>
+    <string name="nome">Nome</string>
+    <string name="app_name">Compras Australia</string>
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
     <string name="nav_header_title" translatable="false">Android Studio</string>
     <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
     <string name="nav_header_desc" translatable="false">Navigation header</string>
-    <string name="action_settings">Settings</string>
-    <string name="senha">Password</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="senha">Senha</string>
     <string name="cadastrar">Cadastre-se</string>
     <string name="info_all_fields">É necessario informa todos os campos</string>
     <string name="general_erro">Algo de errado nao esta certo</string>
-    <string name="email_exists">Email already exists, please use other</string>
-    <string name="login">login</string>
+    <string name="email_exists">Email Já existente, pf ultilize outro</string>
+    <string name="login">Login</string>
     <string name="user_pass_error">Usuário e/ou senha estão incorretos</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="descricao">Descrição</string>
-    <string name="Produto_alterada_sucesso">Produto alterada com sucesso</string>
-    <string name="Produto_incluida_sucesso">Produto adicionada com sucesso</string>
-    <string name="Produto_removida_sucessp">Produto removida com sucesso</string>
-    <string name="adicionar_item">Adicionar Produto</string>
-    <string name="atualizar_tarefa">Atualizar Produto</string>
+    <string name="produto_alterada_sucesso">Produto alterado com sucesso</string>
+    <string name="produto_incluida_sucesso">Produto adicionado com sucesso</string>
+    <string name="produto_removida_sucessp">Produto removido com sucesso</string>
+    <string name="adicionar_Item">Adicionar Produto</string>
     <string name="email">Digite seu email</string>
-    <string name="nao_tem_uma_conta">Não possui uma conta?</string>
-    <string name="cadastre_se">Log in</string>
+    <string name="nao_tem_uma_conta">Ainda não possui uma conta?</string>
+    <string name="cadastre_se">Cadastre-se</string>
+    <string name="title_activity_maps">Map</string>
     <string name="botao_voltar">Voltar ao menu</string>
-    <string name="info_map">Here it is the best store to do your shopping !!!</string>
+    <string name="info_map">Aqui é a melhor loja para fazer suas compras !!!</string>
     <string name="check_box">Item Comprado</string>
-    <string name="button_add_date">Clique para seleciona a data</string>
-    <string name="preco_produto">Add Here the product value</string>
-    <string name="secione_categoria">Select the category...</string>
-    <string name="erro_cant_open_activity">\@string/nao foi possivel abrir o mapa!!</string>
-    <string name="textDeveloper">Developer: Adriano R P Leite</string>
+    <string name="button_add_date">" Data estimada de compra"</string>
+    <string name="preco_produto">valor estimado do produto</string>
+    <string name="secione_categoria">Selecione a categoria do produto</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="erro_cant_open_activity">Desculpe não possivel abri o mapa : (</string>
+    <string name="textDeveloper">" Desenvolvido por: Adriano R P Leite"</string>
     <string name="textVersion">Current App Version: 1.0</string>
     <string name="tvInfoProduct">Digite abaixo as informações do produto de sua lista de compras</string>
-    <string name="necessario_input_dados">Please fill in the description and price fields</string>
-    <string name="hello">Welcome, user</string>
+    <string name="necessario_input_dados">" Por favor, preencha os campos de descrição e preço"</string>
+    <string name="hello">Bem vindo, usuario</string>
     <string name="compradas">Produtos comprados</string>
-    <string name="pendentes">A Comprar</string>
+    <string name="pendentes">" To buy"</string>
     <string name="sair">Logout</string>
     <string name="mapas">Mapas</string>
     <string name="sobre">Sobre</string>
+    <string name="remocao_do_produto">Remoção do Produto</string>
+    <string name="Remove">Remove</string>
+    <string name="adicionar_item">Adicionar Produto</string>
 
 </resources>

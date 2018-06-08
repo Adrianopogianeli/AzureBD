@@ -108,7 +108,7 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
                 textGetPrice.setText(task.price.toString())
 
 
-                buttonSave.text = getString(R.string.atualizar_tarefa)
+                buttonSave.text = getString(R.string.adicionar_Item)
 
             }
         }

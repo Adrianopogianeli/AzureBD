@@ -31,4 +31,8 @@
     <string name="preco_produto">Add Here the product value</string>
     <string name="secione_categoria">Select the category...</string>
 
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
 </resources>

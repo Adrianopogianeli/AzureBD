@@ -13,6 +13,7 @@ import br.fiap.apogianeli.azurebd.business.TaskBusiness
 import br.fiap.apogianeli.azurebd.constants.TaskConstants
 import br.fiap.apogianeli.azurebd.entities.PriorityEntity
 import br.fiap.apogianeli.azurebd.entities.TaskEntity
+import br.fiap.apogianeli.azurebd.views.TaskListFragment
 import br.fiap.apogianeli.azurebd.util.SecurityPreferences
 import kotlinx.android.synthetic.main.activity_task_form.*
 import java.text.SimpleDateFormat
@@ -171,5 +172,7 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
         val adapter = ArrayAdapter<String> (this, android.R.layout.simple_spinner_dropdown_item, lstPriorities)
         spinnerPriority.adapter = adapter
     }
+
+
 
 }

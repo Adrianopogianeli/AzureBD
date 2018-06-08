@@ -25,5 +25,6 @@
     <string name="email">Digite seu email</string>
     <string name="nao_tem_uma_conta">Não possui uma conta?</string>
     <string name="cadastre_se">Log in</string>
+    <string name="botao_voltar">Voltar ao menu</string>
 
 </resources>

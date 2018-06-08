@@ -76,6 +76,8 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         if (arguments != null){
             mTaskFilter = arguments!!.getInt(TaskConstants.TASKFILTER.KEY)
 
+
+
         }
     }
 

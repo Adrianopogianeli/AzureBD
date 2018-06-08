@@ -24,5 +24,7 @@
     <string name="email">Digite seu email</string>
     <string name="nao_tem_uma_conta">Don\'t have account?</string>
     <string name="cadastre_se">Log in</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="botao_voltar">Voltar ao menu</string>
 
 </resources>

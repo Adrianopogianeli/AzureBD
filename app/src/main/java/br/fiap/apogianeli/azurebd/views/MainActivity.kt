@@ -7,9 +7,11 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import br.fiap.apogianeli.azurebd.R
 import br.fiap.apogianeli.azurebd.business.PriorityBusiness
 import br.fiap.apogianeli.azurebd.constants.TaskConstants
@@ -23,6 +25,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private lateinit var mSecurityPreferences: SecurityPreferences
     private lateinit var mPriorityBusiness: PriorityBusiness
+    private lateinit var mapsActivity: MainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +48,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         mSecurityPreferences = SecurityPreferences(this)
         mPriorityBusiness = PriorityBusiness(this)
+        //mapsActivity = MapsActivity(this)
 
         loadPriorityCache()
         startDefaultFragment()
@@ -59,6 +63,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onResume() {
         super.onResume()
+        startDefaultFragment()
     }
 
     override fun onPause() {
@@ -104,6 +109,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (id) {
             R.id.nav_done -> fragment = TaskListFragment.newInstance(TaskConstants.TASKFILTER.COMPLETE)
             R.id.nav_todo -> fragment = TaskListFragment.newInstance(TaskConstants.TASKFILTER.TODO)
+            R.id.nav_mapas ->  {
+                //fragment =  map()
+                mapas()
+                //Toast.makeText(this,"Ok abra o mapas",Toast.LENGTH_LONG).show()
+                return false
+            }
             R.id.nav_logout -> {
                 handleLogout()
                 return false
@@ -136,6 +147,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
+    }
+
+    private fun mapas(){
+        try {
+            startActivity(Intent(this,MapsActivity::class.java))
+
+            finish()
+        }catch (e: Exception){
+            Toast.makeText(this,"nao foi possivel abrir o mapa!!",Toast.LENGTH_LONG).show()
+            println("----------------------->${e.message}")
+        }
     }
 
     private fun formatUserName(){

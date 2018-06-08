@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="nome">Name</string>
-    <string name="app_name">Compras AUT</string>
+    <string name="app_name">Shopping Australia</string>
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
     <string name="nav_header_title" translatable="false">Android Studio</string>
@@ -9,7 +9,7 @@
     <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="senha">Password</string>
-    <string name="cadastrar">Add</string>
+    <string name="cadastrar">Cadastre-se</string>
     <string name="info_all_fields">É necessario informa todos os campos</string>
     <string name="general_erro">Algo de errado nao esta certo</string>
     <string name="email_exists">Email already exists, please use other</string>
@@ -17,14 +17,19 @@
     <string name="user_pass_error">Usuário e/ou senha estão incorretos</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="descricao">Descrição</string>
-    <string name="tarefa_alterada_sucesso">Tarefa alterada com sucesso</string>
-    <string name="tarefa_incluida_sucesso">Tarefa adicionada com sucesso</string>
-    <string name="tarefa_removida_sucessp">Tarefa removida com sucesso</string>
-    <string name="adicionar_tarefa">Adicionar tarefa</string>
-    <string name="atualizar_tarefa">Atualizar tarefa</string>
+    <string name="tarefa_alterada_sucesso">Produto alterada com sucesso</string>
+    <string name="tarefa_incluida_sucesso">Produto adicionada com sucesso</string>
+    <string name="tarefa_removida_sucessp">Produto removida com sucesso</string>
+    <string name="adicionar_item">Adicionar Produto</string>
+    <string name="atualizar_tarefa">Atualizar Produto</string>
     <string name="email">Digite seu email</string>
     <string name="nao_tem_uma_conta">Não possui uma conta?</string>
     <string name="cadastre_se">Log in</string>
     <string name="botao_voltar">Voltar ao menu</string>
+    <string name="info_map">Here it is the best store to do your shopping !!!</string>
+    <string name="check_box">Item Comprado</string>
+    <string name="button_add_date">Clique para seleciona a data</string>
+    <string name="preco_produto">Add Here the product value</string>
+    <string name="secione_categoria">Select the category...</string>
 
 </resources>

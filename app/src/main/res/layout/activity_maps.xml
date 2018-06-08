@@ -13,6 +13,17 @@
         android:text="@string/botao_voltar"
         />
 
+    <TextView
+        android:id="@+id/textInfoMap"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="@string/info_map"
+        android:textAlignment="center"
+        android:fontFamily="@font/angrybirds"
+        android:textColor="@drawable/common_google_signin_btn_icon_light"
+        app:layout_constraintTop_toBottomOf="@+id/buttonMenu"
+        />
+
     <FrameLayout
         android:id="@+id/mapFragment"
         android:layout_width="0dp"
@@ -21,7 +32,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonMenu">
+        app:layout_constraintTop_toBottomOf="@+id/textInfoMap">
     </FrameLayout>
 
 

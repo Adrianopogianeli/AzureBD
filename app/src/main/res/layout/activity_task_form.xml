@@ -4,22 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f5f5dc"
     tools:context=".views.TaskFormActivity">
+
+    <TextView
+        android:id="@+id/tvInfoProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="@string/tvInfoProduct"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editDescription"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:hint="@string/descricao"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
+        android:maxLength="30"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvInfoProduct"
+        />
 
     <TextView
         android:id="@+id/textCategoria"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
+        android:textAllCaps="true"
         android:text="@string/secione_categoria"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -42,6 +56,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_margin="20dp"
+        android:maxLength="10"
+        android:textAllCaps="true"
+        android:numeric="decimal"
+        android:inputType="numberDecimal"
         android:hint="@string/preco_produto"
         app:layout_constraintTop_toBottomOf="@id/spinnerPriority"
 

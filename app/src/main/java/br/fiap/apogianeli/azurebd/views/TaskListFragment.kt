@@ -106,7 +106,7 @@ class TaskListFragment : Fragment(), View.OnClickListener {
             override fun onDeleteClick(taskId: Int) {
                 mTaskBusiness.delete(taskId)
                 loadTasks()
-                Toast.makeText(context,getString(R.string.tarefa_removida_sucessp),Toast.LENGTH_LONG).show()
+                Toast.makeText(context,getString(R.string.produto_removida_sucessp),Toast.LENGTH_LONG).show()
             }
 
             override fun onUncompliteClick(taskId: Int) {

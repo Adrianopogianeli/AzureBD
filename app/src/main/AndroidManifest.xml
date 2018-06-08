@@ -29,13 +29,7 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".views.AdduserActivity" />
-        <activity android:name=".views.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".views.LoginActivity"/>
         <activity android:name=".views.TaskFormActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -58,7 +52,7 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".views.AboutActivity" />
 
-        <activity android:name=".views.SplashScreen"
+        <activity android:name=".views.SplashActivity"
             android:theme="@style/FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

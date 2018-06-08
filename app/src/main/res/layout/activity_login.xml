@@ -15,9 +15,9 @@
     <ImageView
         android:id="@+id/imageLogo"
         android:layout_width="180dp"
-        android:layout_height="wrap_content"
+        android:layout_height="180dp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_logotipo"
+        android:src="@drawable/logosplash"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 

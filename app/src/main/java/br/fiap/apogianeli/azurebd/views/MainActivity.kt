@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onStart() {
         super.onStart()
+        startDefaultFragment()
     }
 
     override fun onResume() {
@@ -119,6 +120,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 handleLogout()
                 return false
             }
+            R.id.nav_about ->{
+                sobre()
+                return false
+            }
         }
 
         val fragmentManager = supportFragmentManager
@@ -155,7 +160,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             finish()
         }catch (e: Exception){
-            Toast.makeText(this,"nao foi possivel abrir o mapa!!",Toast.LENGTH_LONG).show()
+            Toast.makeText(this,getString(R.string.erro_cant_open_activity),Toast.LENGTH_LONG).show()
+            println("----------------------->${e.message}")
+        }
+    }
+
+    private fun sobre(){
+        try{
+            startActivity(Intent(this,AboutActivity::class.java))
+            finish()
+        }catch (e: Exception){
+            Toast.makeText(this,getString(R.string.erro_cant_open_activity),Toast.LENGTH_LONG).show()
             println("----------------------->${e.message}")
         }
     }

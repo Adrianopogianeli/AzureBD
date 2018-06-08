@@ -48,14 +48,17 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
 
     override fun onStart() {
         super.onStart()
+        loadDataFromActivity()
     }
 
     override fun onResume() {
         super.onResume()
+        loadDataFromActivity()
     }
 
     override fun onPause() {
         super.onPause()
+        loadDataFromActivity()
     }
 
     override fun onStop() {
@@ -113,27 +116,34 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
     private fun handleSave(){
 
         try{
-            //  [1, 2, 3, 4]
+
             val priorityId = mLstPrioritiesId[spinnerPriority.selectedItemPosition]
             val complete = checkComplete.isChecked
             val dueDate = buttonDate.text.toString()
             val description = editDescription.text.toString()
             val userID =  mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_ID).toInt()
+            val price = textValor.text.toString()
 
-            val taskEntity = TaskEntity(mTaskId, userID, priorityId, description, dueDate, complete )
+            if(description != "" && price != "") {
 
-            if(mTaskId == 0) {
-                mTaskBusiness.insert(taskEntity)
-                Toast.makeText(this,getString(R.string.tarefa_incluida_sucesso),Toast.LENGTH_LONG).show()
-            }else{
-                mTaskBusiness.update(taskEntity)
-                Toast.makeText(this,getString(R.string.tarefa_alterada_sucesso),Toast.LENGTH_LONG).show()
+                val taskEntity = TaskEntity(mTaskId, userID, priorityId, description, dueDate, complete)
+
+
+                if (mTaskId == 0) {
+                    mTaskBusiness.insert(taskEntity)
+                    Toast.makeText(this, getString(R.string.produto_incluida_sucesso), Toast.LENGTH_LONG).show()
+                } else {
+                    mTaskBusiness.update(taskEntity)
+                    Toast.makeText(this, getString(R.string.produto_alterada_sucesso), Toast.LENGTH_LONG).show()
+                }
             }
-
+            else{
+                Toast.makeText(this, getString(R.string.necessario_input_dados), Toast.LENGTH_LONG)
+            }
             finish()
 
         }catch (e: Exception){
-            Toast.makeText(this, getString(R.string.tarefa_alterada_sucesso), Toast.LENGTH_LONG)
+            Toast.makeText(this, getString(R.string.produto_alterada_sucesso), Toast.LENGTH_LONG)
         }
 
     }

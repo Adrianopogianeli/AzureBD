@@ -1,9 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.AboutActivity">
+    android:orientation="vertical"
+    android:background="#f5f5dc"
+    tools:context=".views.AboutActivity"
+    style="FullscreenTheme">
 
-</android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/buttonMenuAbout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="@string/botao_voltar"
+        />
+
+    <ImageView
+        android:id="@+id/ivlogo"
+        android:layout_marginTop="100dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/logosplash"
+        app:layout_constraintTop_toBottomOf="@+id/buttonMenuAbout" />
+
+    <TextView
+        android:id="@+id/textDeveloper"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="@string/textDeveloper"
+        android:layout_marginTop="50dp"
+        android:textAlignment="center"
+        android:fontFamily="@font/angrybirds"
+        android:textColor="#0a0a0a"
+        app:layout_constraintTop_toBottomOf="@+id/ivlogo"
+        />
+
+    <TextView
+        android:id="@+id/textVersion"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="@string/textVersion"
+        android:layout_marginTop="50dp"
+        android:textAlignment="center"
+        android:fontFamily="@font/angrybirds"
+        android:textColor="#0a0a0a"
+        app:layout_constraintTop_toBottomOf="@+id/ivlogo"
+        />
+
+</android.support.v7.widget.LinearLayoutCompat>

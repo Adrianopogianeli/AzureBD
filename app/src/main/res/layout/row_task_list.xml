@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#f5f5dc"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
     android:paddingTop="20dp">
@@ -22,7 +21,7 @@
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/imageTask"
-        android:textSize="20dp"
+        android:textSize="30dp"
         android:maxLength="80"
         android:textStyle="bold"
         android:text="Description"

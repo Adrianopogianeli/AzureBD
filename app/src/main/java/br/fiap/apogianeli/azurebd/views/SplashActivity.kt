@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.support.v7.app.AppCompatDelegate
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import br.fiap.apogianeli.azurebd.R
@@ -18,6 +19,8 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
         loadAnim()
         //Initialize the Handler

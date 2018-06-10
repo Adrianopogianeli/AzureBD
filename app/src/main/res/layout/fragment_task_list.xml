@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.TaskListFragment"
-    android:background="#f5f5dc"
-    style="@style/FullScreen">
+>
 
 
 
